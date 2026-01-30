@@ -5,6 +5,8 @@ using Robust.Shared.Network;
 using Content.Server.Polymorph;
 using Content.Shared._Crescent.HadalCorrosion;
 using Content.Server.Polymorph.Systems;
+using Robust.Shared.Serialization.Manager;
+using Robust.Shared.Collections;
 
 namespace Content.Server._Crescent.HadalCorrosion;
 
@@ -12,6 +14,8 @@ public sealed class HadalCorrosionSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _net = default!;
     [Dependency] private readonly PolymorphSystem _polymorph = default!;
+
+    [Dependency] private readonly ISerializationManager _serialization = default!;
 
     public override void Initialize()
     {
@@ -26,7 +30,12 @@ public sealed class HadalCorrosionSystem : EntitySystem
             return;
 
         var query = EntityManager.EntityQueryEnumerator<HadalCorrosionComponent, SpaceBiomeTrackerComponent>();
+        var entList = new ValueList<(EntityUid, HadalCorrosionComponent, SpaceBiomeTrackerComponent)>();
         while (query.MoveNext(out var ent, out var hadalCorrosion, out var biomeTracker))
+        {
+            entList.Add((ent, hadalCorrosion, biomeTracker));
+        }
+        foreach (var (ent, hadalCorrosion, biomeTracker) in entList)
         {
             var inHadal = biomeTracker.Biome == "default";
 

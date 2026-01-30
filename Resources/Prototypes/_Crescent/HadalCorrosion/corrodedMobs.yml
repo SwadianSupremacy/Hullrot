@@ -34,4 +34,5 @@
     revertOnCrit: true
     copiedComponents:
     - HadalCorrosion
+    - StaticOverlay
 
