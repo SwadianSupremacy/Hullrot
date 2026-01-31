@@ -153,8 +153,8 @@
   components:
   - type: ShipyardListing
     shuttles:
-    - Khopesh
-    - Broadsword
+    #- Khopesh
+    #- Broadsword
 
 - type: entity
   id: UnionfallClementineMothershipComputer
