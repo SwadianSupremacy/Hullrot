@@ -23,6 +23,7 @@
     state: mecha_clamp
   - type: MechGrabber
     grabDelay: 0.2
+    maxContents: 5
   - type: UIFragment
     ui: !type:MechGrabberUi
   - type: ContainerContainer
